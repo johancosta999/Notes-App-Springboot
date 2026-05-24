@@ -23,10 +23,6 @@ public class NoteService {
         return noteRepository.findAll();
     }
 
-    public Note getNoteById(Long id){
-        return noteRepository.findById(id).orElse(null);
-    }
-
     public void deleteNote(Long id){
         noteRepository.deleteById(id);
     }
