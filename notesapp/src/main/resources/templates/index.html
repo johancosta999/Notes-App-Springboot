@@ -1,52 +1,11 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
-
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <title>Notes App</title>
 </head>
-
 <body>
-
-<h1>Notes App 📝</h1>
-
-<form action="/save" method="post" th:object="${note}">
-
-    <input type="text"
-           th:field="*{title}"
-           placeholder="Enter title"
-           required>
-
-    <br><br>
-
-    <textarea th:field="*{content}"
-              placeholder="Enter content"></textarea>
-
-    <br><br>
-
-    <button type="submit">
-        Save Note
-    </button>
-
-</form>
-
-<hr>
-
-<h2>All Notes</h2>
-
-<div th:each="note : ${notes}">
-
-    <h3 th:text="${note.title}"></h3>
-
-    <p th:text="${note.content}"></p>
-
-    <a th:href="@{/delete/{id}(id=${note.id})}">
-        Delete
-    </a>
-
-    <hr>
-
-</div>
+    <h1>Hello Spring Boot 🚀</h1>
 
 </body>
 </html>
