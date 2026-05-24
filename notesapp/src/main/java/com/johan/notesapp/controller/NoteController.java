@@ -33,4 +33,21 @@ public class NoteController {
         noteService.deleteNote(id);
         return "redirect:/";
     }
+
+    @GetMapping("/update/{id}")
+    public String editNote(@PathVariable Long id, Model model){
+        Note note = noteService.getNoteById(id);
+        model.addAttribute("note", noteService.getNoteById(id));
+        return "updateNote";
+    }
+
+    @PostMapping("/update/{id}")
+    public String updateNote(@PathVariable Long id, @ModelAttribute Note note) {
+
+        note.setId(id);
+
+        noteService.saveNote(note);
+
+        return "redirect:/";
+    }
 }
