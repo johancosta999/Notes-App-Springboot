@@ -1,5 +1,3 @@
-LABEL authors="Johan Costa"
-
 FROM eclipse-temurin:21
 
 WORKDIR /app
