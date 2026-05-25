@@ -1,4 +1,4 @@
-package com.johan.notesapp.servive;
+package com.johan.notesapp.service;
 
 import com.johan.notesapp.model.Note;
 import com.johan.notesapp.repository.NoteRepository;
