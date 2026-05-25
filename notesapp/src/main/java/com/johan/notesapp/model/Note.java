@@ -1,14 +1,17 @@
 package com.johan.notesapp.model;
 
 import jakarta.persistence.*;
+import lombok.Getter;
+import lombok.Setter;
 
-
+@Setter
+@Getter
 @Entity
 public class Note {
     @Id
     @GeneratedValue(strategy=GenerationType.AUTO)
     private Long id;
-    
+
     private String title;
     private String content;
 
@@ -19,31 +22,5 @@ public class Note {
         this.title =title;
         this.content=content;
     }
-
-    public Long getId() {
-        return id;
-    }
-
-    public String getTitle() {
-        return title;
-    }
-
-    public String getContent() {
-        return content;
-    }
-
-    public void setTitle(String title){
-        this.title=title;
-    }
-
-    public void setContent(String content){
-        this.content=content;
-    }
-
-    public void setId(Long id){
-        this.id = id;
-    }
-
-
 
 }
