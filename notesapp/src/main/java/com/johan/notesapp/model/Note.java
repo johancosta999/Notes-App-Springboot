@@ -2,11 +2,13 @@ package com.johan.notesapp.model;
 
 import jakarta.persistence.*;
 
+
 @Entity
 public class Note {
     @Id
     @GeneratedValue(strategy=GenerationType.AUTO)
     private Long id;
+    
     private String title;
     private String content;
 
@@ -41,4 +43,7 @@ public class Note {
     public void setId(Long id){
         this.id = id;
     }
+
+
+
 }
