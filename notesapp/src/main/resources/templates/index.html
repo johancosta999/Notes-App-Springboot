@@ -10,26 +10,40 @@
 <body>
 <div class="container mt-5">
 
-<h1>Notes App 📝</h1>
+<h1>Notes App 📝 </h1>
 <hr>
-<form action="/save" method="post" th:object="${note}" class="card p-4 shadow rounded">
+<form id="createNoteForm" action="/save" method="post" th:object="${note}" class="card p-4 shadow rounded">
 
-    <input type="text"
-           th:field="*{title}"
-           placeholder="Enter title"
-           class="form-control"
-           maxlength="100"
-           required>
-    <!-- Show title validation error -->
-    <div class="text-danger mt-1" th:if="${#fields.hasErrors('title')}" th:errors="*{title}"></div>
+    <!-- Title field -->
+    <label>
+        <input type="text"
+               th:field="*{title}"
+               class="form-control placeholder-wave"
+               maxlength="100"
+               placeholder="Enter title"
+               required>
+    </label>
+
+    <div class="text-danger mt-1"
+         th:if="${#fields.hasErrors('title')}"
+         th:errors="*{title}">
+    </div>
 
     <br><br>
 
-    <textarea th:field="*{content}"
-              placeholder="Enter content" class="form-control"
-              required maxlength="500"  ></textarea>
+    <!-- Content field -->
+    <label>
+        <textarea th:field="*{content}"
+                  placeholder="Enter content"
+                  class="form-control placeholder-wave"
+                  maxlength="500"
+                  required></textarea>
+    </label>
 
-    <div class="text-danger mt-1" th:if="${#fields.hasErrors('content')}" th:errors="*{content}" ></div>
+    <!-- Backend validation message for blank content -->
+    <div class="text-danger mt-1"
+         th:if="${#fields.hasErrors('content')}"
+         th:errors="*{content}"></div>
 
     <br><br>
 
@@ -63,6 +77,36 @@
 
 </div>
 </div>
+
+<script>
+    // Frontend validation: treat whitespace-only content as empty.
+    document.getElementById('createNoteForm').addEventListener('submit', function (event) {
+        const title = document.querySelector('[name="title"]');
+        const content = document.querySelector('[name="content"]');
+
+        let valid = true;
+
+        if (!title.value.trim()) {
+            title.setCustomValidity('Title is required');
+            valid = false;
+        } else {
+            title.setCustomValidity('');
+        }
+
+        if (!content.value.trim()) {
+            content.setCustomValidity('Content cannot be empty');
+            valid = false;
+        } else {
+            content.setCustomValidity('');
+        }
+
+        if (!valid) {
+            event.preventDefault();
+            title.reportValidity();
+            content.reportValidity();
+        }
+    });
+</script>
 
 </body>
 </html>
