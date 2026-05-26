@@ -45,7 +45,7 @@ public class NoteController {
     @GetMapping("/update/{id}")
     public String editNote(@PathVariable Long id, Model model){
         Note note = noteService.getNoteById(id);
-        model.addAttribute("note", noteService.getNoteById(id));
+        model.addAttribute("note", note);
         return "updateNote";
     }
 

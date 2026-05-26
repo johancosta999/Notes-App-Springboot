@@ -18,11 +18,17 @@
         <input type="text"
         th:field="*{title}"
         class="form-control"
+        maxlength="100"
+        required
         >
+
+        <div class="text-danger mt-1" th:if="${#fields.hasErrors('content')}" th:errors="*{content}"></div>
 
     <br><br>
 
-        <textarea th:field="*{content}" class="form-control"></textarea>
+        <textarea th:field="*{content}" class="form-control" maxlength="500" required></textarea>
+
+        <div class="text-danger mt-1" th:if="${#fields.hasErrors('content')}" th:errors="*{content}"></div>
 
     <br><br>
 
