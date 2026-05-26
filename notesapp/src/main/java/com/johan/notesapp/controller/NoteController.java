@@ -2,6 +2,10 @@ package com.johan.notesapp.controller;
 
 import com.johan.notesapp.model.Note;
 import com.johan.notesapp.service.NoteService;
+//controller validation imports
+import jakarta.validation.Valid;
+import org.springframework.validation.BindingResult;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -22,7 +26,12 @@ public class NoteController {
     }
 
     @PostMapping("/save")
-    public String saveNote(@ModelAttribute Note note){
+    public String saveNote(@Valid @ModelAttribute("note") Note note, BindingResult result, Model model){
+        //if validation fails redisplay the form with error messages
+        if(result.hasErrors()){
+            model.addAttribute("notes", noteService.getAllNotes());
+            return "index";
+        }
         noteService.saveNote(note);
         return "redirect:/";
     }
@@ -41,12 +50,19 @@ public class NoteController {
     }
 
     @PostMapping("/update/{id}")
-    public String updateNote(@PathVariable Long id, @ModelAttribute Note note) {
-
+    public String updateNote(@PathVariable Long id,@Valid @ModelAttribute("note") Note note, BindingResult result, Model model) {
         note.setId(id);
 
-        noteService.saveNote(note);
+        if(result.hasErrors()){
+            return "updateNote";
+        }
 
+        noteService.saveNote(note);
         return "redirect:/";
     }
 }
+
+
+
+
+
